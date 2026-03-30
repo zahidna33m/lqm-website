@@ -73,7 +73,7 @@ const classes = [
   {
     slug: "algiers-22",
     code: "Algiers 22",
-    level: "Level 3",
+    level: "Level 31",
     format: "Online",
     schedule: "Saturdays 6:30 AM – 9:15 AM",
     instructor: "Javid Sheikh",
