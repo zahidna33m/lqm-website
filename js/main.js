@@ -161,6 +161,14 @@ document.addEventListener('DOMContentLoaded', function () {
         infoRowHTML = prereqsHTML;
       }
 
+      // Zoom notice — online classes with open registration only
+      var zoomNoticeHTML = cls.format === 'Online' && cls.status === 'active'
+        ? '<p class="class-zoom-notice">' +
+            '<strong>Zoom required.</strong> You must have a Zoom account to register and attend. ' +
+            '<a href="https://zoom.us/signup" target="_blank" rel="noopener noreferrer">Sign up free at zoom.us</a> if you don\u2019t have one.' +
+          '</p>'
+        : '';
+
       // Build the action button based on status
       var buttonHTML;
       if (cls.status === 'active' && cls.registrationUrl) {
@@ -203,6 +211,7 @@ document.addEventListener('DOMContentLoaded', function () {
               '</div>' +
             '</div>' +
             infoRowHTML +
+            zoomNoticeHTML +
             buttonHTML +
           '</div>' +
         '</div>'
