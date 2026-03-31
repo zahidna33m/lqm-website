@@ -1,0 +1,8 @@
+# Netlify Redirects
+# Maps old WordPress registration URLs to the new site with the correct accordion pre-opened.
+# Format: /old-path    /new-path    status-code
+
+/alfalah26reg/              /?open=al-falah-26#classes      301
+/class-registration-baku-25/    /?open=baku-25#classes      301
+
+# TODO: add redirect lines for any other old registration URLs as you find them

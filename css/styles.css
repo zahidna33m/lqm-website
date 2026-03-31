@@ -421,6 +421,109 @@ section {
   display: inline-block;
 }
 
+/* Waitlist variant — same grey style but clickable (links to contact form) */
+a.btn-status-closed {
+  pointer-events: auto;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a.btn-status-closed:hover {
+  background: #444444;
+  color: #ffffff;
+}
+
+/* Prerequisites bullet list */
+.class-prereq-list {
+  margin: 6px 0 0 0;
+  padding-left: 18px;
+  font-size: 0.88rem;
+  color: #555;
+  line-height: 1.7;
+}
+
+.class-prereq-list li {
+  margin-bottom: 1px;
+}
+
+/* Regulations link */
+.class-regulations-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #C0392B;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(192, 57, 43, 0.3);
+  transition: border-color 0.2s;
+}
+
+.class-regulations-link:hover {
+  border-bottom-color: #C0392B;
+}
+
+/* Info row: video (left) + prerequisites (right) */
+.class-info-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  margin: 12px 0 0;
+}
+
+.class-video-wrap {
+  flex-shrink: 0;
+  width: 260px;
+}
+
+/* YouTube facade — aspect-ratio keeps height correct at any width */
+.class-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #000;
+  cursor: pointer;
+}
+
+.class-video iframe,
+.class-video-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.class-video-thumb {
+  object-fit: cover;
+}
+
+.class-video-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+}
+
+.class-video:hover .class-video-play {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Prerequisites block */
+.class-prereqs {
+  flex: 1;
+  min-width: 0;
+  margin-top: 12px;
+}
+
 /* Responsive: collapse to 1 column on mobile */
 @media (max-width: 600px) {
   .class-detail-grid {
@@ -434,6 +537,15 @@ section {
   }
   .accordion-body {
     padding: 16px 18px 20px;
+  }
+  .class-info-row {
+    flex-direction: column;
+  }
+  .class-video-wrap {
+    width: 100%;
+  }
+  .class-prereqs {
+    margin-top: 0;
   }
 }
 
@@ -1017,6 +1129,17 @@ section {
   gap: 20px;
 }
 
+/* Honeypot — visually hidden, never shown to real users */
+.form-honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  tabindex: -1;
+}
+
 @media (max-width: 700px) {
   .contact-cols {
     grid-template-columns: 1fr;
@@ -1084,6 +1207,67 @@ section {
     width: 100%;
     text-align: center;
   }
+}
+
+/* --- Class Regulations Page --------------------------------------------- */
+.regulations-card {
+  max-width: 720px;
+}
+
+.regs-section {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.regs-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.regs-section h2 {
+  font-size: 1.1rem;
+  font-family: Georgia, serif;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.regs-section p {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+.regs-list {
+  padding-left: 20px;
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.regs-list li {
+  margin-bottom: 5px;
+}
+
+.regs-list a {
+  color: #C0392B;
+  font-weight: 500;
+}
+
+.regs-sublist {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 5px 0 2px;
+}
+
+.regs-sublist li {
+  margin-bottom: 3px;
+}
+
+.regs-footer {
+  margin-top: 28px;
 }
 
 /* --- Footer ------------------------------------------------------------- */

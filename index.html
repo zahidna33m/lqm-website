@@ -6,6 +6,8 @@
   <title>LQ Mississauga — Learn the Language of the Quran</title>
   <meta name="description" content="LQ Mississauga offers free Qur'anic Arabic classes based on the Madinah Arabic Books. Volunteer-run, open to all." />
   <link rel="stylesheet" href="css/styles.css" />
+  <!-- Google reCAPTCHA v2 -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
 
@@ -570,7 +572,12 @@
           <div class="contact-form-col">
             <h3>Send a Message</h3>
             <!-- TODO: wire up to backend / email service -->
-            <form class="contact-form" action="#" method="POST" aria-label="Contact form">
+            <form class="contact-form" id="contact-form" action="#" method="POST" aria-label="Contact form">
+              <!-- Honeypot: invisible to humans, bots fill it in — submission rejected if populated -->
+              <div class="form-honeypot" aria-hidden="true">
+                <label for="hp-website">Website</label>
+                <input type="text" id="hp-website" name="website" tabindex="-1" autocomplete="off" />
+              </div>
               <div class="form-group">
                 <label for="contact-name">Name</label>
                 <input
@@ -602,8 +609,10 @@
                   required
                 ></textarea>
               </div>
+              <!-- TODO: replace YOUR_SITE_KEY with the key from https://www.google.com/recaptcha/ -->
+              <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY" data-callback="onRecaptchaSuccess" data-expired-callback="onRecaptchaExpired"></div>
               <div class="form-submit">
-                <button type="submit" class="btn btn-primary">Send Message</button>
+                <button type="submit" id="contact-submit" class="btn btn-primary" disabled>Send Message</button>
               </div>
             </form>
           </div>
@@ -622,9 +631,6 @@
         <img src="assets/images/logo.jpg" alt="LQ Mississauga" />
       </div>
       <p class="footer-name">LQ Mississauga — Language of the Qur'an</p>
-      <p class="footer-email">
-        <a href="mailto:info@lqmississauga.com">info@lqmississauga.com</a>
-      </p>
       <p class="footer-copy">&copy; <span id="footer-year"></span> LQ Mississauga. All rights reserved.</p>
     </div>
   </footer>

@@ -31,6 +31,33 @@
   }
 
   /* -------------------------------------------------------------------------
+     Contact Form — reCAPTCHA v2 + honeypot + timing spam protection
+  -------------------------------------------------------------------------- */
+  var contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    var formLoadTime = Date.now();
+
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Honeypot check — bots fill this hidden field, humans don't see it
+      var honeypot = contactForm.querySelector('#hp-website');
+      if (honeypot && honeypot.value.trim() !== '') return;
+
+      // Timing check — reject submissions under 3 seconds
+      if (Date.now() - formLoadTime < 3000) return;
+
+      // TODO: wire to Netlify Forms or email service before going live
+      var btn = document.getElementById('contact-submit');
+      btn.textContent = 'Message Sent!';
+      btn.disabled = true;
+      contactForm.reset();
+      if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
+      document.getElementById('contact-submit').disabled = true;
+    });
+  }
+
+  /* -------------------------------------------------------------------------
      Tabs — Madinah Book Resources (Book 1 / Book 2 / Book 3)
   -------------------------------------------------------------------------- */
   const tabNav = document.querySelector('.tab-nav[role="tablist"]');
@@ -95,12 +122,54 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (list && typeof classes !== 'undefined') {
     list.innerHTML = classes.map(function (cls) {
-      // Build the register button based on status
+
+      // Build prerequisites + regulations section
+      var prereqsHTML =
+        '<div class="class-prereqs">' +
+          '<span class="class-detail-label">Prerequisites</span>' +
+          '<ul class="class-prereq-list">' +
+            cls.prerequisite.map(function (p) { return '<li>' + p + '</li>'; }).join('') +
+          '</ul>' +
+          (cls.regulationsUrl
+            ? '<a href="' + cls.regulationsUrl + '" target="_blank" rel="noopener noreferrer" class="class-regulations-link">View Class Regulations \u2192</a>'
+            : '') +
+        '</div>';
+
+      // Build info row: video left + prereqs right (or prereqs full-width if no video)
+      var infoRowHTML;
+      if (cls.videoId) {
+        infoRowHTML =
+          '<div class="class-info-row">' +
+            '<div class="class-video-wrap">' +
+              '<div class="class-video" data-video-id="' + cls.videoId + '">' +
+                '<img ' +
+                  'src="https://img.youtube.com/vi/' + cls.videoId + '/maxresdefault.jpg" ' +
+                  'onerror="this.src=\'https://img.youtube.com/vi/' + cls.videoId + '/hqdefault.jpg\'" ' +
+                  'alt="' + cls.code + ' class introduction" ' +
+                  'class="class-video-thumb" />' +
+                '<button class="class-video-play" type="button" aria-label="Play video">' +
+                  '<svg viewBox="0 0 68 48" width="68" height="48" aria-hidden="true">' +
+                    '<path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#C0392B"/>' +
+                    '<path d="M45 24 27 14v20" fill="#fff"/>' +
+                  '</svg>' +
+                '</button>' +
+              '</div>' +
+            '</div>' +
+            prereqsHTML +
+          '</div>';
+      } else {
+        infoRowHTML = prereqsHTML;
+      }
+
+      // Build the action button based on status
       var buttonHTML;
-      if (cls.status === 'active') {
+      if (cls.status === 'active' && cls.registrationUrl) {
         buttonHTML =
-          '<a href="' + cls.registerLink + '" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-register">' +
+          '<a href="' + cls.registrationUrl + '" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-register">' +
           'Register for ' + cls.code + '</a>';
+      } else if (cls.status === 'waitlist') {
+        buttonHTML =
+          '<a href="#contact" class="btn btn-status-closed btn-register">Fill Out the Contact Form to Join the Waitlist</a>';
       } else if (cls.status === 'coming-soon') {
         buttonHTML =
           '<span class="btn btn-status-coming-soon btn-register">Coming Soon</span>';
@@ -129,14 +198,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 '<span class="class-detail-value">' + cls.scheduleDetail + '</span>' +
               '</div>' +
               '<div class="class-detail-item">' +
-                '<span class="class-detail-label">Prerequisite</span>' +
-                '<span class="class-detail-value">' + cls.prerequisite + '</span>' +
-              '</div>' +
-              '<div class="class-detail-item class-detail-item--full">' +
                 '<span class="class-detail-label">Comments</span>' +
                 '<span class="class-detail-value">' + cls.comments + '</span>' +
               '</div>' +
             '</div>' +
+            infoRowHTML +
             buttonHTML +
           '</div>' +
         '</div>'
@@ -167,8 +233,52 @@ document.addEventListener('DOMContentLoaded', function () {
         item.classList.add('open');
         trigger.setAttribute('aria-expanded', true);
         trigger.querySelector('.class-toggle-icon').textContent = '\u2212'; // minus sign
+        // Scroll so the top of the newly opened card is visible below the fixed nav
+        setTimeout(function () {
+          var navHeight = document.getElementById('site-nav').offsetHeight || 70;
+          var top = item.getBoundingClientRect().top + window.scrollY - navHeight - 12;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }, 50);
       }
     });
+  }
+
+  /* -----------------------------------------------------------------------
+     YouTube facade — swap thumbnail for real iframe on click
+  ----------------------------------------------------------------------- */
+  document.addEventListener('click', function (e) {
+    var facade = e.target.closest('.class-video[data-video-id]');
+    if (!facade) return;
+    var videoId = facade.dataset.videoId;
+    facade.removeAttribute('data-video-id'); // prevent double-fire
+    facade.innerHTML =
+      '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1" ' +
+      'title="Class introduction video" frameborder="0" ' +
+      'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ' +
+      'allowfullscreen></iframe>';
+  });
+
+  /* -----------------------------------------------------------------------
+     Auto-open accordion from URL param  ?open=<slug>
+     Used by Netlify redirects from old WordPress registration URLs.
+     e.g. lqmississauga.com/alfalah26reg/ → /?open=al-falah-26#classes
+  ----------------------------------------------------------------------- */
+  if (list) {
+    var params  = new URLSearchParams(window.location.search);
+    var openSlug = params.get('open');
+    if (openSlug) {
+      var targetItem = list.querySelector('[data-slug="' + openSlug + '"]');
+      if (targetItem) {
+        targetItem.classList.add('open');
+        var trigger = targetItem.querySelector('.accordion-trigger');
+        if (trigger) trigger.setAttribute('aria-expanded', true);
+        var icon = targetItem.querySelector('.class-toggle-icon');
+        if (icon) icon.textContent = '\u2212';
+        setTimeout(function () {
+          targetItem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 150);
+      }
+    }
   }
 
   /* -----------------------------------------------------------------------
@@ -208,3 +318,17 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 });
+
+/* ============================================================
+   reCAPTCHA v2 callbacks (must be global, not inside IIFE)
+   Called by data-callback / data-expired-callback on the widget
+============================================================ */
+function onRecaptchaSuccess() {
+  var btn = document.getElementById('contact-submit');
+  if (btn) btn.disabled = false;
+}
+
+function onRecaptchaExpired() {
+  var btn = document.getElementById('contact-submit');
+  if (btn) btn.disabled = true;
+}
