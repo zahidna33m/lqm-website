@@ -1149,6 +1149,15 @@ a.btn-status-closed:hover {
 }
 
 /* Honeypot — visually hidden, never shown to real users */
+.form-success {
+  padding: 20px;
+  background: #f0faf4;
+  border-left: 3px solid #27ae60;
+  color: #1a5c35;
+  font-size: 1rem;
+  border-radius: 4px;
+}
+
 .form-honeypot {
   position: absolute;
   width: 1px;

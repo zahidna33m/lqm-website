@@ -18,13 +18,4 @@ const LQM_CONFIG = {
   // -----------------------------------------------------------------------
   contactFormName: 'contact',           // must match data-netlify-name on the form
 
-  // -----------------------------------------------------------------------
-  // Google reCAPTCHA v2
-  // 1. Go to https://www.google.com/recaptcha/admin
-  // 2. Register site → choose "reCAPTCHA v2 — I'm not a robot"
-  // 3. Add domain: lqmississauga.com
-  // 4. Paste the Site Key below (keep the quotes)
-  // -----------------------------------------------------------------------
-  recaptchaSiteKey: 'YOUR_SITE_KEY',
-
 };

@@ -47,13 +47,34 @@
       // Timing check — reject submissions under 3 seconds
       if (Date.now() - formLoadTime < 3000) return;
 
-      // TODO: wire to Netlify Forms or email service before going live
       var btn = document.getElementById('contact-submit');
-      btn.textContent = 'Message Sent!';
+      btn.textContent = 'Sending…';
       btn.disabled = true;
-      contactForm.reset();
-      if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
-      document.getElementById('contact-submit').disabled = true;
+
+      var formData = new FormData(contactForm);
+      var data = {};
+      formData.forEach(function (value, key) { data[key] = value; });
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (json) {
+          if (json.success) {
+            contactForm.innerHTML = '<p class="form-success">Your message has been sent. We\'ll be in touch soon!</p>';
+          } else {
+            btn.textContent = 'Send Message';
+            btn.disabled = false;
+            alert('Something went wrong. Please try again or email us directly.');
+          }
+        })
+        .catch(function () {
+          btn.textContent = 'Send Message';
+          btn.disabled = false;
+          alert('Something went wrong. Please try again or email us directly.');
+        });
     });
   }
 
@@ -326,18 +347,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
+
 });
 
-/* ============================================================
-   reCAPTCHA v2 callbacks (must be global, not inside IIFE)
-   Called by data-callback / data-expired-callback on the widget
-============================================================ */
-function onRecaptchaSuccess() {
-  var btn = document.getElementById('contact-submit');
-  if (btn) btn.disabled = false;
-}
-
-function onRecaptchaExpired() {
-  var btn = document.getElementById('contact-submit');
-  if (btn) btn.disabled = true;
-}
