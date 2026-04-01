@@ -2,7 +2,8 @@
 # Maps old WordPress registration URLs to the new site with the correct accordion pre-opened.
 # Format: /old-path    /new-path    status-code
 
-/alfalah26reg/              /?open=al-falah-26#classes      301
-/class-registration-baku-25/    /?open=baku-25#classes      301
-
-# TODO: add redirect lines for any other old registration URLs as you find them
+/alfalah26reg/                    /?open=al-falah-26#classes  301
+/class-registration-baku-25/     /?open=baku-25#classes      301
+/class-registration-baghdad-24/  /?open=baghdad-24#classes   301
+/class-registration-ankara-24/   /?open=ankara-24#classes    301
+/class-registration-amman-23/    /?open=amman-23#classes     301
