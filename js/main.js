@@ -304,11 +304,12 @@ document.addEventListener('DOMContentLoaded', function () {
         if (trigger) trigger.setAttribute('aria-expanded', true);
         var icon = targetItem.querySelector('.class-toggle-icon');
         if (icon) icon.textContent = '\u2212';
+        // Wait for page to fully render before scrolling
         setTimeout(function () {
           var navHeight = document.getElementById('site-nav').offsetHeight || 70;
           var top = targetItem.getBoundingClientRect().top + window.scrollY - navHeight - 12;
-          window.scrollTo({ top: top, behavior: 'smooth' });
-        }, 150);
+          window.scrollTo({ top: top, behavior: 'instant' });
+        }, 400);
       }
     }
   }
