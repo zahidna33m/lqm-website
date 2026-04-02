@@ -144,17 +144,19 @@ document.addEventListener('DOMContentLoaded', function () {
   if (list && typeof classes !== 'undefined') {
     list.innerHTML = classes.map(function (cls) {
 
-      // Build prerequisites + regulations section
+      // Build prerequisites section (no regulations link here)
       var prereqsHTML =
         '<div class="class-prereqs">' +
           '<span class="class-detail-label">Prerequisites</span>' +
           '<ul class="class-prereq-list">' +
             cls.prerequisite.map(function (p) { return '<li>' + p + '</li>'; }).join('') +
           '</ul>' +
-          (cls.regulationsUrl
-            ? '<a href="' + cls.regulationsUrl + '" target="_blank" rel="noopener noreferrer" class="class-regulations-link">View Class Regulations \u2192</a>'
-            : '') +
         '</div>';
+
+      // Regulations link sits below the info row, always left-aligned
+      var regulationsHTML = cls.regulationsUrl
+        ? '<a href="' + cls.regulationsUrl + '" target="_blank" rel="noopener noreferrer" class="class-regulations-link">View Class Regulations \u2192</a>'
+        : '';
 
       // Build info row: video left + prereqs right (or prereqs full-width if no video)
       var infoRowHTML;
@@ -177,9 +179,10 @@ document.addEventListener('DOMContentLoaded', function () {
               '</div>' +
             '</div>' +
             prereqsHTML +
-          '</div>';
+          '</div>' +
+          regulationsHTML;
       } else {
-        infoRowHTML = prereqsHTML;
+        infoRowHTML = prereqsHTML + regulationsHTML;
       }
 
       // Zoom notice — online classes with open registration only

@@ -3,15 +3,21 @@
 # Format: /old-path    /new-path    status-code
 
 # Class registration pages
-/alfalah26reg/                    /?open=al-falah-26#classes  301
-/class-registration-baku-25/     /?open=baku-25#classes      301
-/class-registration-baghdad-24/  /?open=baghdad-24#classes   301
-/class-registration-ankara-24/   /?open=ankara-24#classes    301
-/class-registration-amman-23/    /?open=amman-23#classes     301
+/alfalah26reg/                      /?open=al-falah-26#classes  301
+/class-registration-algiers-22/     /?open=algiers-22#classes   301
+/class-registration-amman-23/       /?open=amman-23#classes     301
+/class-registration-ankara-24/      /?open=ankara-24#classes    301
+/class-registration-baghdad-24/     /?open=baghdad-24#classes   301
+/class-registration-baku-25/        /?open=baku-25#classes      301
 
 # Section pages
-/classes/                        /#classes                   301
-/resources/                      /#resources                 301
-/madinah-books-resources/        /#resources                 301
-/about-lqm/                      /#about                     301
-/contact/                        /#contact                   301
+/classes/                        /#classes                           301
+/resources/                      /#resources                         301
+/madinah-books-resources/        /#resources                         301
+/notes/                          /#resources                         301
+/about-lqm/                      /#about                             301
+/contact/                        /#contact                           301
+
+# Regulations pages
+/class-regulations/              /class-regulations/index.html       200
+/in-person-class-regulations/    /in-person-class-regulations/index.html  200

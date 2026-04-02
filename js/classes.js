@@ -20,7 +20,8 @@
    REGULATIONS URL:
      regulationsUrl — link to the class regulations page shown on the card.
                       Use "/class-regulations/" for online classes.
-                      Set to null for in-person classes.
+                      Use "/in-person-class-regulations/" for in-person classes.
+                      Set to null if not applicable.
 
    PREREQUISITES:
      prerequisite — list of requirements shown on the card.
@@ -45,7 +46,7 @@ const classes = [
     ],
     comments:        "In-Person at Al-Falah Islamic Centre.",
     videoId:         "n7NGWiMbW-M",
-    regulationsUrl:  null,
+    regulationsUrl:  "/in-person-class-regulations/",
     registrationUrl: null,
     status:          "waitlist"
   },
