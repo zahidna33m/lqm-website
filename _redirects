@@ -19,8 +19,8 @@
 /contact/                        /#contact                           301
 
 # Regulations pages
-/class-regulations/              /class-regulations/index.html            200
-/in-person-class-regulations/    /in-person-class-regulations/index.html  200
+/class-regulations/              /class-regulations/index.html            200!
+/in-person-class-regulations/    /in-person-class-regulations/index.html  200!
 /class-regulations-ankara-24/    /class-regulations/                      301
 /class-regulations-amman-23/     /class-regulations/                      301
 
