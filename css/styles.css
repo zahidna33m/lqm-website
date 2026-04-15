@@ -380,8 +380,8 @@ section {
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #888;
-  font-weight: 600;
+  color: #2a2a2a;
+  font-weight: 700;
 }
 
 .class-detail-value {
@@ -466,7 +466,8 @@ a.btn-status-closed:hover {
 
 /* Regulations link */
 .class-regulations-link {
-  display: inline-block;
+  display: table;
+  margin-left: auto;
   margin-top: 10px;
   font-size: 0.82rem;
   font-weight: 600;
@@ -709,7 +710,7 @@ a.btn-status-closed:hover {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: #999;
+  color: #2a2a2a;
   margin-bottom: 12px;
 }
 
@@ -779,9 +780,9 @@ a.btn-status-closed:hover {
 }
 
 .solution-btn:hover {
-  background: #C0392B;
+  background: #fff8f8;
   border-color: #C0392B;
-  color: #ffffff;
+  color: #C0392B;
   text-decoration: none;
 }
 
@@ -794,8 +795,9 @@ a.btn-status-closed:hover {
 }
 
 .solution-btn-gex:hover {
-  background: #C0392B;
-  color: #ffffff;
+  background: #fff8f8;
+  border-color: #C0392B;
+  color: #C0392B;
 }
 
 /* Shared index link below tabs */
@@ -898,8 +900,8 @@ a.btn-status-closed:hover {
 
 .verb-forms-label {
   font-size: 0.8rem;
-  font-weight: 600;
-  color: #888;
+  font-weight: 700;
+  color: #2a2a2a;
   margin-bottom: 10px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -916,7 +918,7 @@ a.btn-status-closed:hover {
   padding: 6px 15px;
   background: #f9f9f9;
   border: 1px solid #e0e0e0;
-  border-radius: 20px;
+  border-radius: 4px;
   font-size: 0.82rem;
   font-weight: 600;
   color: #444;
@@ -925,9 +927,9 @@ a.btn-status-closed:hover {
 }
 
 .pill:hover {
-  background: #C0392B;
+  background: #fff8f8;
   border-color: #C0392B;
-  color: #ffffff;
+  color: #C0392B;
   text-decoration: none;
 }
 
