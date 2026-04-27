@@ -2,6 +2,9 @@
 # Maps old WordPress URLs to the new one-page site.
 # Format: /old-path    /new-path    status-code
 
+# Block direct access to internal project files
+/CLAUDE.md    /404.html    404
+
 # Class registration pages
 /alfalah26reg/                      /?open=al-falah-26#classes  301
 /class-registration-algiers-22/     /?open=algiers-22#classes   301

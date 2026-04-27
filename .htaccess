@@ -7,6 +7,14 @@ Options -Indexes
 RewriteEngine On
 
 # -----------------------------------------------------------------------------
+# Block direct access to internal project files
+# -----------------------------------------------------------------------------
+<Files "CLAUDE.md">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# -----------------------------------------------------------------------------
 # Class registration pages
 # -----------------------------------------------------------------------------
 RewriteRule ^alfalah26reg/?$                    /?open=al-falah-26#classes  [R=301,L]
