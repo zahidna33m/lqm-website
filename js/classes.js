@@ -47,8 +47,8 @@ const classes = [
     comments:        "In-Person at Al-Falah Islamic Centre.",
     videoId:         "n7NGWiMbW-M",
     regulationsUrl:  "/in-person-class-regulations/",
-    registrationUrl: null,
-    status:          "waitlist"
+    registrationUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfb3ScYC2OrF_-a34G4mTS87t6cSYlcCc8lzcPEuWp3wX9-nA/viewform?usp=sharing&ouid=102582714504989932766",
+    status:          "active"
   },
   {
     slug:            "baku-25",
