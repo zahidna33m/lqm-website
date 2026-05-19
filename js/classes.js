@@ -53,13 +53,13 @@ const classes = [
   {
     slug:            "baku-25",
     code:            "Baku 25",
-    level:           "Level 1",
+    level:           "Level 2",
     format:          "Online",
     schedule:        "Sundays 6:30 AM – 9:15 AM",
     instructor:      "Javid Sheikh",
     scheduleDetail:  "Sundays @ 6:30 AM – 9:15 AM (Toronto)",
     prerequisite: [
-      "Ability to read the Holy Qur\u2019an and write Arabic alphabets",
+      "Completion of Level 1 (Madinah Book 1)",
       "Strong desire, motivation, and dedication",
       "Commitment for regular attendance and completion of homework",
       "Must be 15 years or older"
