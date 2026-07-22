@@ -31,6 +31,26 @@
 
 const classes = [
   {
+    slug:            "banjul-26",
+    code:            "Banjul 26",
+    level:           "Level 1",
+    format:          "Online",
+    schedule:        "Saturdays 6:30 AM – 9:15 AM",
+    instructor:      "Javid Sheikh",
+    scheduleDetail:  "Saturdays @ 6:30 AM – 9:15 AM (Toronto)",
+    prerequisite: [
+      "Completion of Level 1 (Madinah Book 1)",
+      "Strong desire, motivation, and dedication",
+      "Commitment for regular attendance and completion of homework",
+      "Must be 15 years or older"
+    ],
+    comments:        "Sept 12, 2026",
+    videoId:         null,
+    regulationsUrl:  "/class-regulations/",
+    registrationUrl: null,
+    status:          "coming-soon"
+  },
+  {
     slug:            "al-falah-26",
     code:            "Al-Falah 26",
     level:           "Level 1",
