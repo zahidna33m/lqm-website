@@ -44,7 +44,7 @@ const classes = [
       "Commitment for regular attendance and completion of homework",
       "Must be 15 years or older"
     ],
-    comments:        "Sept 12, 2026",
+    comments:        "Registration opens on August 8, 2026. Classes will begin on Sept 12, 2026",
     videoId:         null,
     regulationsUrl:  "/class-regulations/",
     registrationUrl: null,
