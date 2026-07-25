@@ -48,3 +48,20 @@ RewriteRule ^class-regulations-amman-23/?$     /class-regulations/           [R=
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ / [R=301,L]
+
+# -----------------------------------------------------------------------------
+# Caching — HTML/CSS/JS always revalidate (content changes often, not
+# fingerprinted); images cached for a day (change rarely).
+# Mirrors the Netlify _headers file.
+# -----------------------------------------------------------------------------
+<IfModule mod_headers.c>
+    <FilesMatch "\.(html)$">
+        Header set Cache-Control "no-cache"
+    </FilesMatch>
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "no-cache"
+    </FilesMatch>
+    <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|ico)$">
+        Header set Cache-Control "public, max-age=86400"
+    </FilesMatch>
+</IfModule>

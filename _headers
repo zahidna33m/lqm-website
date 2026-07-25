@@ -1,0 +1,10 @@
+# Netlify Headers
+# Caching policy — mirrors the Apache rules in .htaccess.
+# HTML/CSS/JS always revalidate (content changes often, not fingerprinted);
+# images cached for a day (change rarely).
+
+/*
+  Cache-Control: no-cache
+
+/assets/images/*
+  Cache-Control: public, max-age=86400
