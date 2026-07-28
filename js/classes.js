@@ -39,7 +39,7 @@ const classes = [
     instructor:      "Javid Sheikh",
     scheduleDetail:  "Saturdays @ 6:30 AM – 9:15 AM (Toronto)",
     prerequisite: [
-      "Completion of Level 1 (Madinah Book 1)",
+      "Ability to read the Holy Qur\u2019an and write Arabic alphabets",
       "Strong desire, motivation, and dedication",
       "Commitment for regular attendance and completion of homework",
       "Must be 15 years or older"
